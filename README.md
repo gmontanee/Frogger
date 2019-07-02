@@ -12,13 +12,57 @@ La base del juego es crear la rana que se mueva con las 4 flechas del teclado y 
 Para dificultar el juego vamos a hacer que cuando la rana avanze, la pantalla se mueva también con ella, de manera que vayamos avanzando carriles y nos salgan nuevos obstaculos. De este modo vamos a poder poner un contador de scoore que ira sumando conforme vaya esquivando vehiculos.
 
 ## Data structure
--main: builDom, inicialScreen, gameScreen, gameOverScreen, highScoreScreen.
+### main
+fuction builDom
+function inicialScreen 
+function gameScreen 
+fucntion gameOverScreen
+function highScoreScreen
 
--Game: startGame, update, clear, draw, cheekCollisions, gameOverCallBack.
+### Game
+function Game(canvas) {
+  player = null;
+  obstacles = [];
+  isGameOver = false;
+  cavas = canvas;
+  ctx = this.canvas.getContext('2d);
+  onGameOver = null;
+}
+Game.startGame
+Game.update
+Game.clear
+Game.draw
+Game.cheekCollisions
+Game.gameOverCallBack
 
--Player: move, draw.  
+### Player
+function Player(canvas) {
+  canvas = canvas;
+  ctx = canvas.getContext('2d');
+  heigth = 20;
+  width = 20;
+  x = (canvas.width/2);
+  y = 20;
+  color = 'green';
+}
+Player.move
+PLayer.draw 
 
--Obstacles move, draw.
+### Obstacles 
+function Obstacles(canvas, direction) {
+  canvas = canvas;
+  ctx = canvas.getContext('2d');
+  x = random;
+  y = random(0 or canvas.width);
+  velocity = 10;
+  direction = direction;
+  color = 'red';
+  heigth = 20;
+  width = 50;
+
+}
+Obstacles.move
+Obstacles.draw
 
 
 ## States y States Transitions
@@ -32,7 +76,17 @@ Para dificultar el juego vamos a hacer que cuando la rana avanze, la pantalla se
 
 
 ## Task
-Lista de tareas en Trello.
+-Create archives
+-Copy BoilerPlate
+-Setup git and github
+-Create 4 screens
+-Transition between screens
+-Create Game Loop
+-Create player
+-Move player
+-Create obstacles
+-Check collisions
+-Game over
 
 
 ## Links
@@ -43,7 +97,7 @@ Lista de tareas en Trello.
 
 
 ### Git
-[Link URL](http://github.com)
+[Link URL](https://github.com/gmontanee/Frogger.git)
 
 
 ### Slides
