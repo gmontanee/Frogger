@@ -13,13 +13,16 @@ Para dificultar el juego vamos a hacer que cuando la rana avanze, la pantalla se
 
 ## Data structure
 ### main
+```
 fuction builDom
 function inicialScreen 
 function gameScreen 
 fucntion gameOverScreen
 function highScoreScreen
+```
 
 ### Game
+```
 function Game(canvas) {
   player = null;
   obstacles = [];
@@ -34,8 +37,10 @@ Game.clear
 Game.draw
 Game.cheekCollisions
 Game.gameOverCallBack
+```
 
 ### Player
+```
 function Player(canvas) {
   canvas = canvas;
   ctx = canvas.getContext('2d');
@@ -47,8 +52,10 @@ function Player(canvas) {
 }
 Player.move
 PLayer.draw 
+```
 
 ### Obstacles 
+```
 function Obstacles(canvas, direction) {
   canvas = canvas;
   ctx = canvas.getContext('2d');
@@ -59,10 +66,10 @@ function Obstacles(canvas, direction) {
   color = 'red';
   heigth = 20;
   width = 50;
-
 }
 Obstacles.move
 Obstacles.draw
+```
 
 
 ## States y States Transitions
@@ -76,17 +83,17 @@ Obstacles.draw
 
 
 ## Task
--Create archives
--Copy BoilerPlate
--Setup git and github
--Create 4 screens
--Transition between screens
--Create Game Loop
--Create player
--Move player
--Create obstacles
--Check collisions
--Game over
+- Create archives
+- Copy BoilerPlate
+- Setup git and github
+- Create 4 screens
+- Transition between screens
+- Create Game Loop
+- Create player
+- Move player
+- Create obstacles
+- Check collisions
+- Game over
 
 
 ## Links
