@@ -30,7 +30,7 @@ function main () {
     `);
     var canvasElement = document.querySelector('canvas');
     var  gameInstance = new Game(canvasElement);
-    //is GameOver?
+    gameInstance.gameOverCallBack(createGameOverScreen);
     gameInstance.startGame();
     document.addEventListener('keydown', function(event){
       if(event.key === 'ArrowUp') {

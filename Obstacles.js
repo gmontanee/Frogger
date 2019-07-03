@@ -4,7 +4,7 @@ function Obstacles(canvas, init, alt, rand) {
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
   this.y = alt;
-  if (((alt-60)%80) == 0) {
+  if (((alt-50)%80) == 0) {
     this.direction = 1;
     if (init) {
       this.x = rand;

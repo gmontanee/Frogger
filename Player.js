@@ -23,6 +23,7 @@ Player.prototype.move = function (str) {
   else if (str === 'left') {
     this.x -= 10;
   }
+  console.log(this.x, this.y);
 }
 
 Player.prototype.draw = function () {
