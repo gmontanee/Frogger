@@ -16,15 +16,25 @@ html {
  /* ---- typography ---- */
  
  body {
+  width: 100%;
   color: #111;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
-  line-height: 147%;
+  font-family: 'Times New Roman', Times, serif;
+  /* background-color: black; */
+  background-image: url("http://clipart-library.com/img/2068165.jpg");
+  align-content: center;
  }
  
- h1 {}
+ h1 {
+   font-size: 70px;
+ }
+
  
- h2 {}
+ h2 {
+   display: inline-block;
+   padding: 0 15px 0 15px;
+ }
  
  h3 {}
  
@@ -53,48 +63,94 @@ html {
  }
  
  .container {
-  margin: 0 20px;
- }
- 
- .section {
+  margin:0 auto;
+  max-width:1000px;
+  padding:0 40px;
+}
+
+.section {
   margin-bottom: 20px;
   padding-top: 20px;
- }
- 
- @media (min-width: 768px) {
+}
+
+@media (min-width: 768px) {
   .container {
     max-width: 728px;
     margin: 0 auto;
   }
- }
- 
- 
- 
- 
- /* ---- components ---- */
- 
- .button {
+}
+
+
+
+
+/* ---- components ---- */
+
+button {
   width: 100%;
-  background-color: blue;
-  color: #fff;
-  border: 1px solid #fff
- }
- 
- .button-alt {
+  background-color: greenyellow;
+  color: black;
+  border: 5px solid black;
+  border-radius:20px;
+  padding:15px 20px;
+  font-size: 20px;
+  margin: 15px 0 15px;
+  font-size: 30px;
+}
+
+.button-alt {
   color: blue;
   background-color: #fff;
- }
- 
- /* ---- section ---- */
- 
- section.testimonials {
+}
+
+/* ---- section ---- */
+
+section.testimonials {
   // ...
- }
- 
- section.testimonials .button {
+}
+
+section.testimonials .button {
   margin-bottom: 10px;
- }
+}
+
+section {
+  align-content: center;
+  text-align: center;
+  border-style: solid;
+  margin-top: 50px;
+  background-color: red;
+  border-radius:20px;
+  width: 600px;
+  height: 670px;
+}
 
  canvas {
-   border: solid;
+  margin: 0px 20px 20px 20px;
+  border: solid;
+  background-color: #111;
+  border-radius:20px;
  }
+
+img {
+  width: 200px;
+  height: 140px;
+}
+
+.buttondiv {
+  margin: 50px 50px 50px 50px;
+}
+
+.scorediv {
+  margin: 10px 150px 10px 150px;
+  border: solid;
+  border-radius:20px;
+}
+
+input {
+  border-radius:20px;
+  width: 300px;
+  height: 60px;
+  background-color: #C5FF00;
+  border: 3px solid black;
+  font-size: 40px;
+  text-align: center;
+}

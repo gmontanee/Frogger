@@ -1,10 +1,10 @@
 'use strict';
 
-function Obstacles(canvas, init, alt, rand) {
+function Obstacles(canvas, init, y, rand, index, vel) {
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
-  this.y = alt;
-  if (((alt-50)%80) == 0) {
+  this.y = y;
+  if ((index%2) == 0) {
     this.direction = 1;
     if (init) {
       this.x = rand;
@@ -18,7 +18,7 @@ function Obstacles(canvas, init, alt, rand) {
     } 
     else this.x = canvas.width + 100;
   }
-  this.velocity = 2;
+  this.velocity = vel;
   this.color = 'red';
   this.height = 35;
   this.width = 50;
@@ -31,4 +31,8 @@ Obstacles.prototype.move = function() {
 Obstacles.prototype.draw = function() {
   this.ctx.fillStyle = this.color;
   this.ctx.fillRect(this.x, this.y, this.width, this.height);
+}
+
+Obstacles.prototype.advance= function() {
+  this.y += 40;
 }

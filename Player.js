@@ -8,25 +8,23 @@ function Player(canvas) {
   this.x = parseFloat(canvas.width)/2 - 15;
   this.y = parseFloat(canvas.height) - 67.5;
   this.color = 'green';
+  this.roadsup = 0;
 }
 
 Player.prototype.move = function (str) {
-  if(str == 'up') {
-    this.y -= 40;
-  }
-  else if(str == 'right') {
-    this.x += 10;
-  }
-  else if(str == 'down') {
-    this.y += 40;
+  if(str == 'right') {
+    this.x += 20;
   }
   else if (str === 'left') {
-    this.x -= 10;
+    this.x -= 20;
   }
-  console.log(this.x, this.y);
 }
 
 Player.prototype.draw = function () {
   this.ctx.fillStyle = this.color;
   this.ctx.fillRect(this.x, this.y, this.width, this.height);
+}
+
+Player.prototype.uproad = function () {
+  this.roadsup++;
 }

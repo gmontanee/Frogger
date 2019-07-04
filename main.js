@@ -2,6 +2,8 @@
 
 function main () {
   var mainElement = document.querySelector('#site-main');
+  var sco = 0;
+  var lvl = 1;
 
   function buildDom(html) {
     mainElement.innerHTML = html;
@@ -10,23 +12,50 @@ function main () {
 
   function createInitialScreen() {
     var initialScreen = buildDom(`
+    <div class="container">
       <section>
-        <h1>Frogger</h1>
-        <button id="start-game">Start Game</button>
-        <button id="high-scores">High Scores</button>
+        <h1>FROGGER</h1>
+        <img src="images/frogg1.png" alt="">
+        <form class="buttondiv">
+          <input type="text" id="nickname"/>
+          <button class="start-game">Start Game</button>
+          <button class="high-scores">High Scores</button>
+        </form>
       </section>
+    </div>
       `);
-      var startButton = initialScreen.querySelector('#start-game');
-      var highScoreButton = initialScreen.querySelector('#high-scores');
+      var startButton = initialScreen.querySelector('.start-game');    
       startButton.addEventListener('click',createGameScreen);
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 's') {
+          createGameScreen();
+        }
+      });
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+          createGameScreen();
+        }
+      });
+      var highScoreButton = initialScreen.querySelector('.high-scores');
       highScoreButton.addEventListener('click',createHighScoreScreen);
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'h') {
+          createHighScoreScreen();
+        }
+      });
   }
 
   function createGameScreen() {
     var gameScreen = buildDom(`
+    <div class="container">
       <section>
-        <canvas width="500" height="600"></canvas>
+        <div class="scorediv">
+          <h2>Score:${sco}</h2>
+          <h2>Level:${lvl}</h2>
+        </div>
+        <canvas width="450" height="550"></canvas>
       </section>
+    </div>
     `);
     var canvasElement = document.querySelector('canvas');
     var  gameInstance = new Game(canvasElement);
@@ -34,13 +63,18 @@ function main () {
     gameInstance.startGame();
     document.addEventListener('keydown', function(event){
       if(event.key === 'ArrowUp') {
-        gameInstance.player.move('up');
+        gameInstance.player.uproad();
+        gameInstance.increaseScore();
+        scoreupdate(gameInstance.score);
+        lvlupdate(gameInstance.level);
+        gameInstance.obstacles.forEach(function(obs) {
+          obs.forEach(function(obs1) {
+            obs1.advance();
+          });
+        });
       }
       else if(event.key === 'ArrowRight') {
         gameInstance.player.move('right');
-      }
-      else if(event.key === 'ArrowDown') {
-        gameInstance.player.move('down');
       }
       else if(event.key === 'ArrowLeft') {
         gameInstance.player.move('left');
@@ -50,27 +84,61 @@ function main () {
 
   function  createGameOverScreen() {
     var initialScreen = buildDom(`
-    <section>
-      <h1>Frogger</h1>
-      <button id="restart-game">Restart Game</button>
-      <button id="high-scores">High Scores</button>
-    </section>
+    <div class="container">
+      <section>
+        <h1>FROGGER</h1>
+        <div class="scorediv">
+          <h2>Score:${sco}</h2>
+          <h2>Level:${lvl}</h2>
+        </div>
+        <div class="buttondiv">
+          <button class="restart-game">Restart Game</button>
+          <button class="high-scores">High Scores</button>
+        </div>
+      </section>
+    </div>
     `);
-    var restartButton = initialScreen.querySelector('#restart-game');
-    var highScoreButton = initialScreen.querySelector('#high-scores');
+    var restartButton = initialScreen.querySelector('.restart-game');
     restartButton.addEventListener('click',createGameScreen);
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'r') {
+        createGameScreen();
+      }
+    });
+    var highScoreButton = initialScreen.querySelector('.high-scores');
     highScoreButton.addEventListener('click',createHighScoreScreen);
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'h') {
+        createHighScoreScreen();
+      }
+    });
   }
 
   function createHighScoreScreen() {
     var highScoreScreen = buildDom (`
-    <section>
-    <h1>High Scores</h1>
-    <button>Back</button>
-    </section>
+    <div class="container">
+      <section>
+        <h1>FROGGER</h1>
+        <h2>High Scores</h2>
+        <div class="buttondiv">
+          <button>Back</button>
+        </div>
+      </section>
+    </div>
     `);
     var backButton = highScoreScreen.querySelector('button');
     backButton.addEventListener('click', createInitialScreen);
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'b') {
+        createInitialScreen();
+      }
+    });
+  }
+  function scoreupdate (scogam) {
+    return sco = scogam;
+  }
+  function lvlupdate (lvlgame) {
+    return lvl = lvlgame;
   }
   createInitialScreen();
 }
