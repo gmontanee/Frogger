@@ -50,7 +50,7 @@ function main () {
   function createGameScreen() {
     var gameScreen = buildDom(`
     <div class="container">
-      <section>
+      <section class="gameScreen">
         <canvas width="450" height="550"></canvas>
       </section>
     </div>

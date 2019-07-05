@@ -13,6 +13,7 @@ function Game(canvas, name) {
   this.probability = 0.9;
   this.velobstacles = 2;
   this.name = name;
+  this.gameSong = new Audio('audio/froggersong.ogg');
 }
 
 Game.prototype.startGame = function() {
@@ -40,10 +41,13 @@ Game.prototype.startGame = function() {
     this.cheekCollisions();
     this.checkObstacleScreen();
     if(!this.isGameOver) {
+      this.gameSong.play();
       requestAnimationFrame(loop);
     }
     else {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.gameSong.pause();
+      // delete Game;
       this.onGameOver();
     }
   }
@@ -57,10 +61,10 @@ Game.prototype.update = function () {
     this.level++;
     this.erase();
     if (this.level%2 === 0){
-      this.velobstacles += 0.05;
+      this.velobstacles += 0.1;
     }
     else {
-      this.probability = this.probability - 0.01;
+      this.probability = this.probability - 0.015;
     }
   }
   this.obstacles.forEach(function (arr) {
@@ -146,7 +150,7 @@ Game.prototype.checkObstacleScreen = function() {
 
 Game.prototype.newroads = function(inicio) {
   for(var i = inicio; i < 18; i++) {
-    var y = (this.canvas.height-70) - (i*40);
+    var y = (this.canvas.height-73) - (i*40);
     if (i%6 === 0) {
       var road = new Road(this.canvas, y, 'offroad');
     }

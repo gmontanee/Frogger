@@ -12,16 +12,18 @@ function Road(canvas, y, type) {
     this.color = 'green';
   }
   else if (this.type == 'road') {
-    this.color = 'grey';
+    this.color = '#878787';
   }
 }
 
 Road.prototype.drawroad = function() {
   this.ctx.fillStyle = this.color;
   this.ctx.fillRect(this.x, this.y, this.width, this.height);
+  this.ctx.fillStyle = 'white';
+  this.ctx.fillRect(this.x, this.y, this.width, 1);
+
 }
 
 Road.prototype.advance= function() {
   this.y += 40;
 }
-
