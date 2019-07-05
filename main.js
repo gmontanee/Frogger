@@ -25,18 +25,22 @@ function main () {
       `);
       var startButton = initialScreen.querySelector('.start-game');
       var nickname = document.querySelector('#nickname');  
-      startButton.addEventListener('click',function() {
+      function listenerClick () {
         if (!(nickname.value === "")) {
           player.name = nickname.value;
           createGameScreen();
+          startButton.removeEventListener('click', listenerClick)
         }
-      });
-      document.addEventListener('keydown', function(event) {
+      }
+      function listenerKey(event) {
         if (event.key === 'Enter' && !(nickname.value === "")) {
           player.name = nickname.value;
           createGameScreen();
+          document.removeEventListener('keydown', listenerKey)
         }
-      });
+      }
+      startButton.addEventListener('click',listenerClick);
+      document.addEventListener('keydown', listenerKey);
       
       // var highScoreButton = initialScreen.querySelector('.high-scores');
       // highScoreButton.addEventListener('click',createHighScoreScreen);
@@ -50,14 +54,14 @@ function main () {
   function createGameScreen() {
     var gameScreen = buildDom(`
     <div class="container">
-      <section class="gameScreen">
+      <section class="game-screen">
         <canvas width="450" height="550"></canvas>
       </section>
     </div>
     `);
     var canvasElement = document.querySelector('canvas');
-    var  gameInstance = new Game(canvasElement, player.name);
-    gameInstance.gameOverCallBack(createGameOverScreen);
+    var gameInstance = new Game(canvasElement, player.name);
+    gameInstance.gameOverCallBack(gameover);
     gameInstance.startGame();
     document.addEventListener('keydown', function(event){
       if(event.key === 'ArrowUp') {
@@ -81,6 +85,10 @@ function main () {
         gameInstance.player.move('left');
       }
     });
+    function gameover (){
+      console.log(gameInstance);
+      createGameOverScreen();
+    }
   }
 
   function  createGameOverScreen() {
