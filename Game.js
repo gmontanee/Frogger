@@ -1,8 +1,9 @@
 'use strict';
 
-function Game(canvas) {
+function Game(canvas, name) {
   this.player = null;
   this.obstacles = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
+  this.roads = [];
   this.isGameOver = false;
   this.canvas = canvas;
   this.ctx = this.canvas.getContext('2d');
@@ -11,7 +12,7 @@ function Game(canvas) {
   this.score = 0;
   this.probability = 0.9;
   this.velobstacles = 2;
-  this.name = null;
+  this.name = name;
 }
 
 Game.prototype.startGame = function() {
@@ -20,6 +21,7 @@ Game.prototype.startGame = function() {
   var filaini = 0;
   var numeroelem = 25;
   this.randomObstacles(filaini, numeroelem);
+  this.newroads(0);
   init = false;
   var rand = 0;
 
@@ -32,7 +34,6 @@ Game.prototype.startGame = function() {
         this.obstacles[index].push(newObstacle);
       }
     }
-    console.log('loop')
     this.update();
     this.clear();
     this.draw();
@@ -74,12 +75,16 @@ Game.prototype.clear = function() {
 }
 
 Game.prototype.draw = function() {
+  this.roads.forEach(function (eachRoad) {
+    eachRoad.drawroad();
+  });
   this.player.draw();
   this.obstacles.forEach(function(arr) {
     arr.forEach(function(obj) {
       obj.draw();
     });
   });
+  this.drawscore();
 }
 
 Game.prototype.cheekCollisions = function() {
@@ -107,6 +112,9 @@ Game.prototype.erase = function() {
     this.obstacles.push([]);
   }
   this.randomObstacles(12, 20);
+  this.roads.forEach(function (roads) {
+    roads.y -= 240;
+  });
 }
 
 Game.prototype.randomObstacles = function (filaini, numeroelem) {
@@ -134,4 +142,27 @@ Game.prototype.checkObstacleScreen = function() {
       }
     })
   })
+}
+
+Game.prototype.newroads = function(inicio) {
+  for(var i = inicio; i < 18; i++) {
+    var y = (this.canvas.height-70) - (i*40);
+    if (i%6 === 0) {
+      var road = new Road(this.canvas, y, 'offroad');
+    }
+    else {
+      var road = new Road(this.canvas, y, 'road');
+    }
+    this.roads.push(road);
+  }
+}
+
+Game.prototype.drawscore = function () {
+  this.ctx.fillStyle = 'black';
+  this.ctx.fillRect(0, this.canvas.height-30, this.canvas.width, 30);
+  this.ctx.fillStyle = 'white';
+  this.ctx.font = "20px Arial";
+  this.ctx.fillText(`Level: ${this.level}`, 40, this.canvas.height-7.5);
+  this.ctx.font = "20px Arial";
+  this.ctx.fillText(`Score: ${this.score}`, this.canvas.width-110, this.canvas.height-7.5);
 }
